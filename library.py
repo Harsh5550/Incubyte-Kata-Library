@@ -27,3 +27,14 @@ class Library():
                 logging.info(f"You have borrowed '{book.title}'.")
             else:
                 logging.info(f"Book '{book.title}' is currently unavailable.")
+
+    def _return_book(self, isbn):
+        if isbn not in self.books:
+            logging.info(f"No book found with ISBN {isbn}.")
+        else:
+            book = self.books[isbn]
+            if not book.is_available:
+                book.is_available = True
+                logging.info(f"Thank you for returning '{book.title}'.")
+            else:
+                logging.info(f"Book '{book.title}' was not borrowed.")

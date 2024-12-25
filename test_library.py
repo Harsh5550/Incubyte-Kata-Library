@@ -60,3 +60,12 @@ class TestLibrary(unittest.TestCase):
         with self.assertLogs() as log:
             self.library._return_book("99999")
         self.assertIn("No book found with ISBN", log.output[0])
+
+    def test_view_available_books(self):
+        """Test viewing available books."""
+        self.library._add_book("87654", "The Lion King", "Charles Alwin", 1901)
+        self.library._add_book("65432", "The Monsoon Diary", "Johnathan Darwin", 2003)
+        self.library._borrow_book("87654")
+        available_books = [book.isbn for book in self.library.books.values() if book.is_available]
+        self.assertIn("65432", available_books)
+        self.assertNotIn("87654", available_books)

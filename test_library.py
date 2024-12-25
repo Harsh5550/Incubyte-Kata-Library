@@ -18,3 +18,24 @@ class TestLibrary(unittest.TestCase):
         # Try to add another book with same ISBN
         self.library._add_book('1231', 'Tom and Jerry', 'John Doe', 1933)
         self.assertEqual(self.library.books["1231"].title, "The Jungle Book")
+
+    def test_borrow_book(self):
+        """Test borrowing a book."""
+        self.library._add_book("12345", "Python Programming", "John Doe", 2020)
+        self.library._borrow_book("12345")
+        self.assertFalse(self.library.books["12345"].is_available)
+
+    def test_borrow_unavailable_book(self):
+        """Test borrowing a book that is already borrowed."""
+        self.library._add_book("12345", "Python Programming", "John Doe", 2020)
+        self.library._borrow_book("12345")
+        with self.assertLogs() as log:
+            self.library._borrow_book("12345")
+        self.assertIn("Book 'Python Programming' is currently unavailable.", log.output[0])
+
+    def test_borrow_nonexistent_book(self):
+        """Test borrowing a book with a non-existent ISBN."""
+        self.library._add_book("12345", "Python Programming", "John Doe", 2020)
+        with self.assertLogs() as log:
+            self.library._borrow_book("99999")
+        self.assertIn("No book found with ISBN 99999.", log.output[0])

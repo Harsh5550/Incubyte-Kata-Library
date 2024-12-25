@@ -16,3 +16,14 @@ class Library():
             book = Book(isbn, title, author, year)
             self.books[isbn] = book
             logging.info(f"Book '{title}' added successfully.")
+
+    def _borrow_book(self, isbn):
+        if isbn not in self.books:
+            logging.info(f"No book found with ISBN {isbn}.")
+        else:
+            book = self.books[isbn]
+            if book.is_available:
+                book.is_available = False
+                logging.info(f"You have borrowed '{book.title}'.")
+            else:
+                logging.info(f"Book '{book.title}' is currently unavailable.")

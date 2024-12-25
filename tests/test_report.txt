@@ -1,0 +1,19 @@
+============================= TEST REPORT =============================
+Ran 9 tests in 0.020s
+
+OK
+----------------------------------------------------------------------
+
+- test_add_book: Passed
+- test_add_duplicate_book: Passed
+- test_borrow_book: Passed
+- test_borrow_unavailable_book: Passed
+- test_borrow_nonexistent_book: Passed
+- test_return_book: Passed
+- test_return_book_not_borrowed: Passed
+- test_return_nonexistent_book: Passed
+- test_view_available_books: Passed
+
+STEPS TO REGENERATE:
+```bash```
+python -m unittest discover -s tests > test_report.txt

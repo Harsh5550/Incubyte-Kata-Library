@@ -39,11 +39,11 @@ class Library():
             else:
                 logging.info(f"Book '{book.title}' was not borrowed.")
 
-    def view_available_books(self):
+    def _view_available_books(self):
         logging.info("Available books:")
         available_books = [book for book in self.books.values() if book.is_available]
         if not available_books:
             logging.info("No books are currently available.")
         else:
             for book in available_books:
-                logging.info(book)
+                logging.info(f"# ISBN: {book.isbn}, {book.title} by {book.author}")
